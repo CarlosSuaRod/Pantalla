@@ -8,18 +8,28 @@ package Datos;
  *
  * @author ymir
  */
-public class Profesor {
+public class Teacher {
     private int id;
-    private String email, dni, password;
-    private boolean isAdmin;
+    private String name,email, dni, password;
+    private boolean admin;
 
-    public Profesor(int id, String email, String dni, String password, boolean isAdmin) {
+    public Teacher(int id, String name, String email, String dni, String password, boolean isAdmin) {
         this.id = id;
+        this.name = name;
         this.email = email;
         this.dni = dni;
         this.password = password;
-        this.isAdmin = isAdmin;
+        this.admin = isAdmin;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public int getId() {
         return id;
@@ -53,13 +63,14 @@ public class Profesor {
         this.password = password;
     }
 
-    public boolean isIsAdmin() {
-        return isAdmin;
+    public boolean isAdmin() {
+        return admin;
     }
 
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
+
     
     
 }

@@ -34,12 +34,12 @@ public class Sesion {
 
     }
 
-    public boolean connect(String n, String p) {
+    public boolean connect(String name, String password) {
         try {
             pstmt = null;
-            pstmt = con.prepareStatement("select * from users where name=? and password=?");
-            pstmt.setString(1, n);
-            pstmt.setString(2, p);
+            pstmt = con.prepareStatement("select * from Users where name=? AND password=? AND is_admin=1");
+            pstmt.setString(1, name);
+            pstmt.setString(2, password);
             
             rs = pstmt.executeQuery();
 
