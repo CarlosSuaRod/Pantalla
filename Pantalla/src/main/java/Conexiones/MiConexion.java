@@ -5,14 +5,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexion {
+public class MiConexion {
 
     static Connection con = null;
     static String URL = "jdbc:mysql://192.168.103.55:3306/Pantalla";
     static String USER = "uPInfo";
     static String PASSWORD = "pInform4tiv4";
 
-    public Conexion() {
+    public MiConexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
