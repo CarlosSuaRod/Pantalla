@@ -71,6 +71,9 @@ body {
 tr {
   opacity: 0%;
 }
+td {
+  font-size: large;
+}
 thead > tr {
   opacity: 100%;
 }
