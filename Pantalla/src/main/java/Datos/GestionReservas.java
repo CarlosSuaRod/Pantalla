@@ -23,7 +23,7 @@ public class GestionReservas {
     private Teacher teacher;
     private int teacherId;
     
-
+    
     public GestionReservas() {
         MiConexion conDB = new MiConexion();
         this.con = conDB.getConnection();
@@ -77,13 +77,31 @@ public class GestionReservas {
         pstmt = null;
         try {
 // añadir id a la tabla
+            pstmt = this.con.prepareStatement("SELECT * FROM Booking where curdate() < fecha_inicio");
+            pstmt.setInt(1,teacherId);
+            
+            ResultSet rs=pstmt.executeQuery();
+            
+            while(rs.next()){
+               //
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionReservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return reservations;
+    }
+        public ArrayList<Reservation> listOwnReservations() {
+        pstmt = null;
+        try {
+// añadir id a la tabla
             pstmt = this.con.prepareStatement("SELECT * FROM Booking where ownerId=?");
             pstmt.setInt(1,teacherId);
             
             ResultSet rs=pstmt.executeQuery();
             
             while(rs.next()){
-                asdlñfkjasñdlfñihalgkajg ---->
+               //
             }
 
         } catch (SQLException ex) {
@@ -96,7 +114,7 @@ public class GestionReservas {
         try {
             pstmt = null;
             //cambiar de los campos 
-            pstmt = this.con.prepareStatement("SELECT * from Booking WHERE campo1>=? AND campo2<=?");
+            pstmt = this.con.prepareStatement("SELECT * from Booking WHERE fecha_inicio>=? AND fecha_fin<=?");
             pstmt.setDate(1, dateIn);
             pstmt.setDate(2, dateOut);
             ResultSet rs = pstmt.executeQuery();
