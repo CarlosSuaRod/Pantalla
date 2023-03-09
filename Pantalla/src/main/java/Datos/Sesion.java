@@ -37,7 +37,7 @@ public class Sesion {
     public boolean connect(String name, String password) {
         try {
             pstmt = null;
-            pstmt = con.prepareStatement("select * from users where name=? AND password=? ");
+            pstmt = con.prepareStatement("select * from Users where name=? AND password=? ");
             pstmt.setString(1, name);
             pstmt.setString(2, password);
             

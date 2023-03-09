@@ -41,7 +41,7 @@ public class GestionReservas {
             if (isAvailable(pDateIn, pDateOut)) {
                 pstmt = null;
 //cambiar al nombre de los campos 
-                pstmt = this.con.prepareStatement("INSERT INTO Booking(dateIn, dateOut, owner) values ?,?,?");
+                pstmt = this.con.prepareStatement("INSERT INTO Bookings (dateIn, dateOut, owner) values ?,?,?");
                 pstmt.setDate(1, dateIn);
                 pstmt.setDate(2, dateOut);
                 pstmt.setString(3, owner);
@@ -60,7 +60,7 @@ public class GestionReservas {
     public boolean deleteReservation(Date pDateIn, Date pDateOut) {
         pstmt = null;
         try {
-            pstmt = this.con.prepareStatement("DELETE FROM Booking where campo1=? and campo2=?");
+            pstmt = this.con.prepareStatement("DELETE FROM Bookings where campo1=? and campo2=?");
             pstmt.setDate(1, dateIn);
             pstmt.setDate(2, dateOut);
 
