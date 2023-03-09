@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bienvenida</title>
+        <title>Bienvenid@</title>
         <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         -->
         <link href="css/css.css" rel="stylesheet" contentType="text/css" >
@@ -22,13 +22,17 @@
             control = request.getParameter("accion");
             if (control != null && control.equals("naita")) {
                 Sesion sesion = new Sesion();
+                
                 String name = request.getParameter("name");
-                String pass = request.getParameter("password");
-                boolean isAdmin = sesion.connect(name, pass);
+                String password = request.getParameter("password");
+                
+                boolean isAdmin = sesion.connect(name, password);
                 session.setAttribute("miSesion", isAdmin);
 
                 if (session.getAttribute("miSesion") != null && (boolean) session.getAttribute("miSesion")) {
                     response.sendRedirect(getServletContext().getContextPath() + "/principal.jsp");
+                    
+                    System.out.println("Se ha redirigido a la pagina principal");
                 }
             }
         %>
@@ -46,7 +50,7 @@
                                 </div>
 
                                 <div class="col-md-5">
-                                    <input class="form-control" type="password" name="pass" placeholder="Contraseña" required>
+                                    <input class="form-control" type="password" name="password" placeholder="Contraseña" required>
                                 </div>
 
                                 <input name="accion" type="hidden" value="naita"></input>

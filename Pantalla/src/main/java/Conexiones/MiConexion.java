@@ -9,12 +9,12 @@ public class MiConexion {
 
     static Connection con = null;
     static String URL = "jdbc:mysql://192.168.103.55:3306/Pantalla";
-    static String USER = "uPInfo";
-    static String PASSWORD = "pInform4tiv4";
+    static String USER = "gestor";
+    static String PASSWORD = "gestor";
 
     public MiConexion() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException cnfe) {
             System.out.println("No se ha encontrado el driver de JDBC " + cnfe);

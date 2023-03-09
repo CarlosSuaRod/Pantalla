@@ -6,8 +6,10 @@ package Datos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+
 import Conexiones.MiConexion;
 import Datos.Teacher;
+
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,11 +30,19 @@ public class GestionProfesor {
 
     }
 
+    public GestionProfesor(Teacher teacher) {
+        //validar si es un admin, si no lo es, devolverlo
+        this.teacher = teacher;
+        MiConexion conDB = new MiConexion();
+        this.con = conDB.getConnection();
+
+    }
+
     public boolean insertTeacher(Teacher teacher) {
         pstmt = null;
         instanceTeacherData(teacher);
         try {
-            pstmt = this.con.prepareStatement("INSERT INTO Users (name, email, dni, password, admin) values ?,?,?,?,?,?");
+            pstmt = this.con.prepareStatement("INSERT INTO Users (name, email, dni, password, is_admin) values ?,?,?,?,?,?");
             pstmt.setString(1, name);
             pstmt.setString(2, email);
             pstmt.setString(3, dni);

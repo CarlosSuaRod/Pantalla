@@ -23,7 +23,7 @@ public class GestionReservas {
     private Teacher teacher;
     private int teacherId;
     
-
+    
     public GestionReservas() {
         MiConexion conDB = new MiConexion();
         this.con = conDB.getConnection();
@@ -41,7 +41,7 @@ public class GestionReservas {
             if (isAvailable(pDateIn, pDateOut)) {
                 pstmt = null;
 //cambiar al nombre de los campos 
-                pstmt = this.con.prepareStatement("INSERT INTO Booking(dateIn, dateOut, owner) values ?,?,?");
+                pstmt = this.con.prepareStatement("INSERT INTO Bookings (dateIn, dateOut, owner) values ?,?,?");
                 pstmt.setDate(1, dateIn);
                 pstmt.setDate(2, dateOut);
                 pstmt.setString(3, owner);
@@ -60,7 +60,7 @@ public class GestionReservas {
     public boolean deleteReservation(Date pDateIn, Date pDateOut) {
         pstmt = null;
         try {
-            pstmt = this.con.prepareStatement("DELETE FROM Booking where campo1=? and campo2=?");
+            pstmt = this.con.prepareStatement("DELETE FROM Bookings where campo1=? and campo2=?");
             pstmt.setDate(1, dateIn);
             pstmt.setDate(2, dateOut);
 
@@ -77,13 +77,31 @@ public class GestionReservas {
         pstmt = null;
         try {
 // añadir id a la tabla
+            pstmt = this.con.prepareStatement("SELECT * FROM Booking where curdate() < fecha_inicio");
+            pstmt.setInt(1,teacherId);
+            
+            ResultSet rs=pstmt.executeQuery();
+            
+            while(rs.next()){
+               //
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionReservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return reservations;
+    }
+        public ArrayList<Reservation> listOwnReservations() {
+        pstmt = null;
+        try {
+// añadir id a la tabla
             pstmt = this.con.prepareStatement("SELECT * FROM Booking where ownerId=?");
             pstmt.setInt(1,teacherId);
             
             ResultSet rs=pstmt.executeQuery();
             
             while(rs.next()){
-                asdlñfkjasñdlfñihalgkajg ---->
+               //
             }
 
         } catch (SQLException ex) {
@@ -96,7 +114,7 @@ public class GestionReservas {
         try {
             pstmt = null;
             //cambiar de los campos 
-            pstmt = this.con.prepareStatement("SELECT * from Booking WHERE campo1>=? AND campo2<=?");
+            pstmt = this.con.prepareStatement("SELECT * from Booking WHERE fecha_inicio>=? AND fecha_fin<=?");
             pstmt.setDate(1, dateIn);
             pstmt.setDate(2, dateOut);
             ResultSet rs = pstmt.executeQuery();
