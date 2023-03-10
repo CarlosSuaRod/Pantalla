@@ -48,9 +48,9 @@
                                 <td><%=cada.getId_User()%></td>
                                 <td><%=cada.getName()%></td>
                                 <% String fechaIn = ""+cada.getDateIn();
-                                   //String[] dateIn = fechaIn.split(".");
+                                   fechaIn = fechaIn.substring(0, fechaIn.length()-2);
                                    String fechaOut = ""+cada.getDateOut();
-                                   //String[] dateOut = fechaOut.split(".");
+                                   fechaOut = fechaOut.substring(0, fechaOut.length()-2);
                                 %><td><%=fechaIn%></td>
                                 <td><%=fechaOut%></td>
                             </tr>

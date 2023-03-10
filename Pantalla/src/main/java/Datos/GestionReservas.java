@@ -37,15 +37,15 @@ public class GestionReservas {
         reservations = new ArrayList();
     }
 
-    public boolean insertReservation(Date pDateIn, Date pDateOut, String owner, int id_user) {
+    public boolean insertReservation(Timestamp pDateIn, Timestamp pDateOut, String teacher, int id_user) {
         try {
             if (isAvailable(pDateIn, pDateOut)) {
                 pstmt = null;
 //cambiar al nombre de los campos 
-                pstmt = this.con.prepareStatement("INSERT INTO Bookings (dateIn, dateOut, owner, id_user) values ?,?,?,?");
-                pstmt.setDate(1, dateIn);
-                pstmt.setDate(2, dateOut);
-                pstmt.setString(3, owner);
+                pstmt = this.con.prepareStatement("INSERT INTO Bookings (dateIn, dateOut, teacher, id_user) values ?,?,?,?");
+                pstmt.setTimestamp(1, pDateIn);
+                pstmt.setTimestamp(2, pDateOut);
+                pstmt.setString(3, teacher);
                 pstmt.setInt(4, id_user);
                 pstmt.executeUpdate();
                 return true;
@@ -59,7 +59,7 @@ public class GestionReservas {
     }
 
 // añadir id del propietario
-    public boolean deleteReservation(Date pDateIn, Date pDateOut) {
+    public boolean deleteReservation(Timestamp pDateIn, Timestamp pDateOut) {
         pstmt = null;
         try {
             pstmt = this.con.prepareStatement("DELETE FROM Bookings where campo1=? and campo2=?");
@@ -102,7 +102,7 @@ public class GestionReservas {
         pstmt = null;
         try {
 // añadir id a la tabla
-            pstmt = this.con.prepareStatement("SELECT * FROM Bookings where ownerId=?");
+            pstmt = this.con.prepareStatement("SELECT * FROM Bookings where id_user=?");
             pstmt.setInt(1, teacherId);
 
             ResultSet rs = pstmt.executeQuery();
@@ -117,13 +117,13 @@ public class GestionReservas {
         return reservations;
     }
 
-    private boolean isAvailable(Date pDateIn, Date pDateOut) {
+    private boolean isAvailable(Timestamp pDateIn, Timestamp pDateOut) {
         try {
             pstmt = null;
             //cambiar de los campos 
-            pstmt = this.con.prepareStatement("SELECT * from Bookings WHERE fecha_inicio>=? AND fecha_fin<=?");
-            pstmt.setDate(1, dateIn);
-            pstmt.setDate(2, dateOut);
+            pstmt = this.con.prepareStatement("SELECT * from Bookings WHERE dateIn>=? AND dateOut<=?");
+            pstmt.setTimestamp(1, pDateIn);
+            pstmt.setTimestamp(2, pDateOut);
             ResultSet rs = pstmt.executeQuery();
 
             return !rs.next();

@@ -1,12 +1,11 @@
 <%-- 
-    Document   : profesores
-    Created on : 9 mar 2023, 11:24:16
+    Document   : tusreservas
+    Created on : 10 mar 2023, 11:31:16
     Author     : suare
 --%>
 
-<%@page import="java.util.ArrayList"%>
-<%@page import="Datos.Teacher"%>
-<%@page import="Datos.GestionProfesor"%>
+<%@page import="Datos.Reservation"%>
+<%@page import="Datos.GestionReservas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,7 +18,7 @@
     <body>
         <div class="container">
             <%
-                GestionProfesor gp = new GestionProfesor();
+                GestionReservas gr = new GestionReservas();
 
                 String accion = request.getParameter("accion");
 
@@ -33,7 +32,7 @@
                         isAdmin = true;
                     }
 
-                    Teacher teacher = new Teacher(name, email, dni, password, isAdmin);
+                    Reservation reserva = new Reservation(name, email, dni, password, isAdmin);
 
                     if (!gp.insertTeacher(teacher)) {%>
             <div class="row">   
