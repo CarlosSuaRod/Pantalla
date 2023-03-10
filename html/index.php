@@ -85,10 +85,10 @@
         <footer class="footer">
             <div class="row" style="width: 100%">
                 <div class="span12">
-                    <marquee>Reserva G101: 
+                    <marquee  direction="up">
+                        <script>
+                            let bookings = ["Reserva G101: "];
                         <?php
-                        
-                        
                         $servername = "192.168.103.55";
                         $username = "gestor";
                         $password = "gestor";
@@ -98,9 +98,10 @@
                         $sql = "SELECT teacher, dateIn, dateOut FROM Bookings"." WHERE DATE(dateIn) = CURDATE() && dateOut > CURTIME()";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
-                            
+                            $i = 0;
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
+                                $i++;
                                 $now = new DateTime("now", new DateTimeZone('Europe/London'));
 
                                 $dateIn = new DateTime($row["dateIn"], new DateTimeZone('Europe/London'));
@@ -109,16 +110,17 @@
                                 //var_dump($dateOut);
 
                                 if($now > $dateIn && $now < $dateOut) {
-                                    echo "<i style='color: lime;'> - ".$row["teacher"].": (".substr($row["dateIn"], 11, 5)." - ".substr($row["dateOut"], 11, 5).")</i> ";
+                                    echo "bookings[$i]=[\"<i style='color: lime;'> - ".$row["teacher"].": (".substr($row["dateIn"], 11, 5)." - ".substr($row["dateOut"], 11, 5).")</i>\"];";
                                 } else {
-                                    echo "<i style='color: white;'> - ".$row["teacher"].": (".substr($row["dateIn"], 11, 5)." - ".substr($row["dateOut"], 11, 5).")</i> ";
+                                    echo "bookings[$i]=[\"<i style='color: white;'> - ".$row["teacher"].": (".substr($row["dateIn"], 11, 5)." - ".substr($row["dateOut"], 11, 5).")</i>\"];";
                                 }
                             }
                           } else {
-                            echo "No hay reservas";
+                            echo "bookings[0]=\"No hay reservas\";";
                           }
                           $conn->close();
                         ?>
+                        </script>
                     </marquee>
                 </div>
             </div>

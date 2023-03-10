@@ -23,6 +23,8 @@ marquee {
     color: white;
     width: 100%;
     max-height: 80px;
+    padding-left: 30px;
+    
 }
 
 html {

@@ -36,10 +36,7 @@ function animacionTablas() {
     }
 }
 
-
 //gestion iframes
-
-
 
 var id = setInterval(async function a() {
     var iframes = document.getElementsByTagName("iframe");
@@ -50,8 +47,26 @@ var id = setInterval(async function a() {
         animacionTablas();
     }
 }, 100);
-/*
-myIframe.addEventListener("load", function() {
-  this.contentWindow.document.notesform.ID_client.value = Client;
-});
-*/
+
+var count = 0;
+document.getElementsByTagName("marquee")[0].innerHTML = bookings[count];
+
+//var moving = false;
+document.getElementsByTagName("marquee")[0].start();
+
+setTimeout(()=>{
+    document.getElementsByTagName("marquee")[0].stop();
+}, 1600);
+
+count++;
+
+setInterval(()=>{
+    document.getElementsByTagName("marquee")[0].start();
+    setTimeout(()=>{
+        document.getElementsByTagName("marquee")[0].innerHTML = bookings[count%bookings.length];
+        count++;
+    }, 2330/2);
+    setTimeout(()=>{
+        document.getElementsByTagName("marquee")[0].stop();
+    }, 2330);
+}, 8000);
