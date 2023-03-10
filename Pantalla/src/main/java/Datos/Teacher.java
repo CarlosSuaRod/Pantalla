@@ -10,8 +10,16 @@ package Datos;
  */
 public class Teacher {
     private int id;
-    private String name,email, dni, password;
+    private String name, email, dni, password;
     private boolean admin;
+
+    public Teacher(String name, String email, String dni, String password, boolean admin) {
+        this.name = name;
+        this.email = email;
+        this.dni = dni;
+        this.password = password;
+        this.admin = admin;
+    }
 
     public Teacher(int id, String name, String email, String dni, String password, boolean isAdmin) {
         this.id = id;
