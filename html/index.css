@@ -27,6 +27,7 @@ marquee {
 
 html {
     height: 100%;
+    opacity: 0%;
 }
 
 body {
@@ -60,6 +61,11 @@ body {
 .vanish {
     animation: 2s 1 vanish;
     opacity: 0%;
+}
+
+.unvanish {
+  animation: 2s 1 unvanish;
+  opacity: 100%;
 }
 
 .colocar {
