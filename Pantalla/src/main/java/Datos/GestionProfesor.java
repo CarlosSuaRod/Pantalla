@@ -110,12 +110,12 @@ public class GestionProfesor {
             boolean isAdmin;
             var rs = ps.executeQuery();
             while (rs.next()) {
-                if (rs.getInt("isAdmin") == 1) {
+                if (rs.getInt("is_Admin") == 1) {
                     isAdmin = true;
                 } else {
                     isAdmin = false;
                 }
-                Teacher profe = new Teacher(rs.getInt("id"),
+                Teacher profe = new Teacher(rs.getInt("id_user"),
                         rs.getString("name"),
                         rs.getString("email"),
                         rs.getString("dni"),

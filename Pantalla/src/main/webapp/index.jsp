@@ -1,3 +1,4 @@
+<%@page import="Datos.Teacher"%>
 <%@page import="Datos.Sesion"%>
 <%@page session="true" %>
 
@@ -20,23 +21,30 @@
         <%
             String control = "";
             control = request.getParameter("accion");
-            if (control != null && control.equals("naita")) {
+            if (control != null && control.equals("login")) {
                 Sesion sesion = new Sesion();
-                
+
                 String name = request.getParameter("name");
                 String password = request.getParameter("password");
-                
-                boolean isAdmin = sesion.connect(name, password);
-                session.setAttribute("miSesion", isAdmin);
+
+                boolean isConnected = sesion.connect(name, password);
+                Teacher teacher = sesion.retrieveInfo(name, password);
+                session.setAttribute("miSesion", isConnected);
+                session.setAttribute("id_user", teacher.getId());
+                session.setAttribute("name", teacher.getName());
+                session.setAttribute("email", teacher.getEmail());
+                session.setAttribute("dni", teacher.getDni());
+                session.setAttribute("password", teacher.getPassword());
+                session.setAttribute("isAdmin", teacher.isAdmin());
 
                 if (session.getAttribute("miSesion") != null && (boolean) session.getAttribute("miSesion")) {
                     response.sendRedirect(getServletContext().getContextPath() + "/principal.jsp");
-                    
+
                     System.out.println("Se ha redirigido a la pagina principal");
                 }
             }
         %>
-        
+
         <div class="form-body">
             <div class="row">
                 <div class="form-holder">
@@ -53,8 +61,8 @@
                                     <input class="form-control" type="password" name="password" placeholder="Contraseña" required>
                                 </div>
 
-                                <input name="accion" type="hidden" value="naita"></input>
-                                
+                                <input name="accion" type="hidden" value="login"></input>
+
                                 <div class="form-button mt-3">
                                     <button id="submit" type="submit" class="btn button-37">Iniciar Sesión</button>
                                 </div>
