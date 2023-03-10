@@ -4,54 +4,63 @@
  */
 package Datos;
 
-import java.sql.Date;
+import java.sql.*;
 
 /**
  *
  * @author ymir
  */
 public class Reservation {
-    private Date dateIn, dateOut;
-    private String owner;
-    private int id;
+    private Timestamp dateIn, dateOut;
+    private String name;
+    private int id_user, id_booking;
 
-    public Reservation(Date dateIn, Date dateOut, String owner, int id) {
+    public Reservation(Timestamp dateIn, Timestamp dateOut, String name, int id_user, int id_booking) {
         this.dateIn = dateIn;
         this.dateOut = dateOut;
-        this.owner = owner;
-        this.id = id;
+        this.name = name;
+        this.id_user = id_user;
+        this.id_booking = id_booking;
     }
 
-    public Date getDateIn() {
+    public Timestamp getDateIn() {
         return dateIn;
     }
 
-    public void setDateIn(Date dateIn) {
+    public void setDateIn(Timestamp dateIn) {
         this.dateIn = dateIn;
     }
 
-    public Date getDateOut() {
+    public Timestamp getDateOut() {
         return dateOut;
     }
 
-    public void setDateOut(Date dateOut) {
+    public void setDateOut(Timestamp dateOut) {
         this.dateOut = dateOut;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getName() {
+        return name;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getId_User() {
+        return id_user;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_User(int id_user) {
+        this.id_user = id_user;
+    }
+
+    public int getId_booking() {
+        return id_booking;
+    }
+
+    public void setId_booking(int id_booking) {
+        this.id_booking = id_booking;
     }
     
     

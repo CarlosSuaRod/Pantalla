@@ -22,29 +22,31 @@ public class GestionReservas {
     private Reservation reservation;
     private Teacher teacher;
     private int teacherId;
-    
-    
+
     public GestionReservas() {
         MiConexion conDB = new MiConexion();
         this.con = conDB.getConnection();
+        reservations = new ArrayList();
     }
 
     public GestionReservas(Teacher teacher) {
         MiConexion conDB = new MiConexion();
         this.con = conDB.getConnection();
         this.teacher = teacher;
-        teacherId=teacher.getId();
+        teacherId = teacher.getId();
+        reservations = new ArrayList();
     }
 
-    public boolean insertReservation(Date pDateIn, Date pDateOut, String owner) {
+    public boolean insertReservation(Date pDateIn, Date pDateOut, String owner, int id_user) {
         try {
             if (isAvailable(pDateIn, pDateOut)) {
                 pstmt = null;
 //cambiar al nombre de los campos 
-                pstmt = this.con.prepareStatement("INSERT INTO Bookings (dateIn, dateOut, owner) values ?,?,?");
+                pstmt = this.con.prepareStatement("INSERT INTO Bookings (dateIn, dateOut, owner, id_user) values ?,?,?,?");
                 pstmt.setDate(1, dateIn);
                 pstmt.setDate(2, dateOut);
                 pstmt.setString(3, owner);
+                pstmt.setInt(4, id_user);
                 pstmt.executeUpdate();
                 return true;
             } else {
@@ -77,13 +79,17 @@ public class GestionReservas {
         pstmt = null;
         try {
 // añadir id a la tabla
-            pstmt = this.con.prepareStatement("SELECT * FROM Booking where curdate() < fecha_inicio");
-            pstmt.setInt(1,teacherId);
-            
-            ResultSet rs=pstmt.executeQuery();
-            
-            while(rs.next()){
-               //
+            pstmt = this.con.prepareStatement("SELECT * FROM Bookings WHERE NOW() <= dateOut");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                reservation = new Reservation(rs.getTimestamp("dateIn"),
+                        rs.getTimestamp("dateOut"),
+                        rs.getString("teacher"),
+                        rs.getInt("id_user"),
+                        rs.getInt("id_booking"));
+                reservations.add(reservation);
             }
 
         } catch (SQLException ex) {
@@ -91,17 +97,18 @@ public class GestionReservas {
         }
         return reservations;
     }
-        public ArrayList<Reservation> listOwnReservations() {
+
+    public ArrayList<Reservation> listOwnReservations() {
         pstmt = null;
         try {
 // añadir id a la tabla
-            pstmt = this.con.prepareStatement("SELECT * FROM Booking where ownerId=?");
-            pstmt.setInt(1,teacherId);
-            
-            ResultSet rs=pstmt.executeQuery();
-            
-            while(rs.next()){
-               //
+            pstmt = this.con.prepareStatement("SELECT * FROM Bookings where ownerId=?");
+            pstmt.setInt(1, teacherId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
             }
 
         } catch (SQLException ex) {
@@ -114,7 +121,7 @@ public class GestionReservas {
         try {
             pstmt = null;
             //cambiar de los campos 
-            pstmt = this.con.prepareStatement("SELECT * from Booking WHERE fecha_inicio>=? AND fecha_fin<=?");
+            pstmt = this.con.prepareStatement("SELECT * from Bookings WHERE fecha_inicio>=? AND fecha_fin<=?");
             pstmt.setDate(1, dateIn);
             pstmt.setDate(2, dateOut);
             ResultSet rs = pstmt.executeQuery();

@@ -65,7 +65,7 @@ public class GestionProfesor {
         try { // VALORAR QUE NO SEA UNO MISMO
             if (!teacher.isAdmin()) {
                 pstmt = this.con.prepareStatement("DELETE FROM Users where dni=? AND email=?");
-                pstmt.setString(1, name);
+                pstmt.setString(1, dni);
                 pstmt.setString(2, email);
 
                 pstmt.executeQuery();
