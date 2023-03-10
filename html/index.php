@@ -85,8 +85,10 @@
         <footer class="footer">
             <div class="row" style="width: 100%">
                 <div class="span12">
-                    <marquee>
+                    <marquee>Reserva G101: 
                         <?php
+                        
+                        
                         $servername = "192.168.103.55";
                         $username = "gestor";
                         $password = "gestor";
@@ -96,9 +98,21 @@
                         $sql = "SELECT teacher, dateIn, dateOut FROM Bookings"." WHERE DATE(dateIn) = CURDATE() && dateOut > CURTIME()";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
+                            
                             // output data of each row
                             while($row = $result->fetch_assoc()) {
-                              echo $row["teacher"].": ".substr($row["dateIn"], 11, 5)." >>> ".substr($row["dateOut"], 11, 5);
+                                $now = new DateTime("now", new DateTimeZone('Europe/London'));
+
+                                $dateIn = new DateTime($row["dateIn"], new DateTimeZone('Europe/London'));
+                                $dateOut = new DateTime($row["dateOut"], new DateTimeZone('Europe/London'));
+                                //var_dump($now -> getTimestamp());
+                                //var_dump($dateOut);
+
+                                if($now > $dateIn && $now < $dateOut) {
+                                    echo "<i style='color: lime;'> - ".$row["teacher"].": (".substr($row["dateIn"], 11, 5)." - ".substr($row["dateOut"], 11, 5).")</i> ";
+                                } else {
+                                    echo "<i style='color: white;'> - ".$row["teacher"].": (".substr($row["dateIn"], 11, 5)." - ".substr($row["dateOut"], 11, 5).")</i> ";
+                                }
                             }
                           } else {
                             echo "No hay reservas";
