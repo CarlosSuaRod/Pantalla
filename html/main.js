@@ -34,6 +34,7 @@ for(var i=0; i<tablas.length; i++) {
     }
 }
 
+/*
 //Reloj analógico
 const secondHand = document.querySelector('.second-hand');
 const minsHand = document.querySelector('.min-hand');
@@ -58,3 +59,4 @@ const hourHand = document.querySelector('.hour-hand');
 setInterval(setDate, 1000);
 
 setDate();
+*/

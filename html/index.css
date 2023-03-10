@@ -29,7 +29,7 @@ html {
 }
 
 body {
-    height: calc(100% - 80px);
+  height: calc(100% - 80px);
 }
 
 .resp_parada {
@@ -71,6 +71,9 @@ body {
 tr {
   opacity: 0%;
 }
+td {
+  font-size: large;
+}
 thead > tr {
   opacity: 100%;
 }
@@ -98,6 +101,7 @@ thead > tr {
 }
 
 /*Reloj analógico*/
+/*
 .clock {
     width: 30rem;
     height: 30rem;
@@ -224,3 +228,4 @@ thead > tr {
     width: 45%;
     height: 2px;
   }
+*/

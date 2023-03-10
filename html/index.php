@@ -10,7 +10,7 @@
     <body>
         <div class="container-fluid" style="width: 100%; height: 100%;">
             <div class="row margentop_35" style="width: 100%; height: calc(100% - 35px);">
-                <div class="col-md-3" style="height: 100%">
+                <div class="col-md-5" style="height: 100%">
                     <div class="resp_parada" id="resp_parada" style="height: 50%">
                             <?php
                                 $url = 'https://www.guaguas.com/js/ajax/consulta_tiempo_parada.php';
@@ -51,6 +51,7 @@
                         ?>
                     </div>
                 </div>
+                <!--
                 <div class="col-md-3" style="height: 100%">
                     <div class="clock">
                         <div class="outer-clock-face">
@@ -65,16 +66,18 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-5" style="width: 100%; over">
-                    <a class="twitter-timeline" href="https://twitter.com/ieselrincon?ref_src=twsrc%5Etfw">Tweets by ieselrincon</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
-                <div class="col-md-1" style="height: 100%">
-                    <div class="weather">
-                        <a class="weatherwidget-io" href="https://forecast7.com/es/28d12n15d44/las-palmas-de-gran-canaria/" data-label_1="LAS PALMAS DE GRAN CANARIA" data-label_2="Tiempo" data-theme="original" >LAS PALMAS DE GRAN CANARIA Tiempo</a>
-                        <script>
-                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-                        </script>
+                </div>-->
+                <div class="col-md-7" style="display: flex; flex-flow: column; height: 100%">
+                    <div style="">
+                        <a class="twitter-timeline" href="https://twitter.com/ieselrincon?ref_src=twsrc%5Etfw" data-tweet-limit="1" data-chrome="nofooter">Tweets by ieselrincon</a>    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                    <div style="flex-grow: 1; position: relative;">
+                        <div class="weather" style="margin: 0; position: relative; top: 50%; -ms-transform: translateY(-50%); transform: translateY(-50%);">
+                            <a class="weatherwidget-io" href="https://forecast7.com/es/28d12n15d44/las-palmas-de-gran-canaria/" data-label_1="LAS PALMAS DE GRAN CANARIA" data-label_2="Tiempo" data-theme="original" >LAS PALMAS DE GRAN CANARIA Tiempo</a>
+                            <script>
+                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                            </script>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,7 +85,27 @@
         <footer class="footer">
             <div class="row" style="width: 100%">
                 <div class="span12">
-                    <marquee>No hay informacion</marquee>
+                    <marquee>
+                        <?php
+                        $servername = "192.168.103.55";
+                        $username = "gestor";
+                        $password = "gestor";
+                        $dbname = "Pantalla";
+
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+                        $sql = "SELECT teacher, dateIn, dateOut FROM Bookings"." WHERE DATE(dateIn) = CURDATE() && dateOut > CURTIME()";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                              echo $row["teacher"].": ".substr($row["dateIn"], 11, 5)." >>> ".substr($row["dateOut"], 11, 5);
+                            }
+                          } else {
+                            echo "No hay reservas";
+                          }
+                          $conn->close();
+                        ?>
+                    </marquee>
                 </div>
             </div>
         </footer>
