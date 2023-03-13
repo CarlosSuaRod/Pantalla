@@ -18,16 +18,16 @@
 
                                 $options = array(
                                     'http' => array(
-                                        'header'  => "Host: www.guaguas.com\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/109.0\r\nAccept: */*\r\nAccept-Language: es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3\r\nAccept-Encoding: gzip, deflate\r\nContent-Type: application/x-www-form-urlencoded; charset=UTF-8\r\nX-Requested-With: XMLHttpRequest\r\nContent-Length: 11\r\nOrigin: https://www.guaguas.com\r\nReferer: https://www.guaguas.com/lineas/proxima-guagua\r\nSec-Fetch-Dest: empty\r\nSec-Fetch-Mode: cors\r\nSec-Fetch-Site: same-origin\r\nTe: trailers\r\n",
+                                        'header'  => "Content-Type: application/x-www-form-urlencoded; charset=UTF-8\r\nX-Requested-With: XMLHttpRequest\r\nReferer: https://www.guaguas.com/lineas/proxima-guagua\r\n",
                                         'method'  => 'POST',
                                         'content' => http_build_query($data)
                                     )
                                 );
                                 $context  = stream_context_create($options);
                                 $result = file_get_contents($url, false, $context);
-                                $frase = gzinflate(substr($result,10,-8));
+                                //$frase = gzinflate(substr($result,10,-8));
                                 
-                                echo $frase;
+                                echo $result;
                             ?>
                     </div>
                 
@@ -38,16 +38,16 @@
 
                             $options = array(
                                 'http' => array(
-                                    'header'  => "Host: www.guaguas.com\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/109.0\r\nAccept: */*\r\nAccept-Language: es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3\r\nAccept-Encoding: gzip, deflate\r\nContent-Type: application/x-www-form-urlencoded; charset=UTF-8\r\nX-Requested-With: XMLHttpRequest\r\nContent-Length: 11\r\nOrigin: https://www.guaguas.com\r\nReferer: https://www.guaguas.com/lineas/proxima-guagua\r\nSec-Fetch-Dest: empty\r\nSec-Fetch-Mode: cors\r\nSec-Fetch-Site: same-origin\r\nTe: trailers\r\n",
+                                    'header'  => "Content-Type: application/x-www-form-urlencoded; charset=UTF-8\r\nX-Requested-With: XMLHttpRequest\r\nReferer: https://www.guaguas.com/lineas/proxima-guagua\r\n",
                                     'method'  => 'POST',
                                     'content' => http_build_query($data)
                                 )
                             );
                             $context  = stream_context_create($options);
                             $result = file_get_contents($url, false, $context);
-                            $frase = gzinflate(substr($result,10,-8));
+                            //$frase = gzinflate(substr($result,10,-8));
                             
-                            echo $frase;
+                            echo $result;
                         ?>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                         <script>
                             let bookings = ["Reserva G101: "];
                         <?php
-                        $servername = "192.168.103.55";
+                        $servername = "192.168.103.62";
                         $username = "gestor";
                         $password = "gestor";
                         $dbname = "Pantalla";
