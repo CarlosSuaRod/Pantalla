@@ -5,7 +5,7 @@ function refrescar() {
     setTimeout(window.location.reload(),1000);
 }
 
-//setTimeout(refrescar, 60000);
+setTimeout(refrescar, 60000);
 
 var tablas = document.getElementsByTagName("tbody");
 
