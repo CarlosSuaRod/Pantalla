@@ -149,7 +149,7 @@
                                 <%if (cada.isAdmin()) {%><td>Sí</td>
                                 <%} else {%><td>No</td><%}%>
                                 <td>
-                                    <form action="formulario.jsp" method="GET">
+                                    <form action="formularioprofe.jsp" method="GET">
                                         <input type="hidden" name="id" value="<%=cada.getId()%>">
                                         <input type="hidden" name="name" value="<%=cada.getName()%>">
                                         <input type="hidden" name="email" value="<%=cada.getEmail()%>">
@@ -182,10 +182,10 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8">
-                    <form action="formulario.jsp" method="GET">
+                    <form action="formularioprofe.jsp" method="GET">
                         <div class="d-grid gap-2">
                             <input type="hidden" name="accion" value="insertar">
-                            <input type="submit" value="Insertar alumno" class="btn btn-success">
+                            <input type="submit" value="Insertar profesor" class="btn btn-success">
                         </div>
                     </form>
                 </div>

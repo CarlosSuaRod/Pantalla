@@ -44,7 +44,7 @@ public class GestionProfesor {
         pstmt = null;
         instanceTeacherData(teacher);
         try {
-            pstmt = this.con.prepareStatement("INSERT INTO Users (name, email, dni, password, is_admin) values ?,?,?,?,?,?");
+            pstmt = this.con.prepareStatement("INSERT INTO Users (name, email, dni, password, is_admin) values (?,?,?,?,?)");
             pstmt.setString(1, name);
             pstmt.setString(2, email);
             pstmt.setString(3, dni);
