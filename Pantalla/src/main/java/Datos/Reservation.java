@@ -15,6 +15,13 @@ public class Reservation {
     private String name;
     private int id_user, id_booking;
 
+    public Reservation(Timestamp dateIn, Timestamp dateOut, String name, int id_user) {
+        this.dateIn = dateIn;
+        this.dateOut = dateOut;
+        this.name = name;
+        this.id_user = id_user;
+    }
+
     public Reservation(Timestamp dateIn, Timestamp dateOut, String name, int id_user, int id_booking) {
         this.dateIn = dateIn;
         this.dateOut = dateOut;
