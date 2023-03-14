@@ -12,9 +12,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+            *, body {
+                color: white;
+            }
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <link href="css/css.css" rel="stylesheet" contentType="text/css" >
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -25,8 +31,8 @@
                 String accion = request.getParameter("accion");
 
                 if (accion != null && accion.equals("insertar")) {
-                    Timestamp dateIn = Timestamp.valueOf(request.getParameter("dateIn").trim());
-                    Timestamp dateOut = Timestamp.valueOf(request.getParameter("dateOut").trim());
+                    Timestamp dateIn = Timestamp.valueOf(request.getParameter("dateIn").trim()+":00.0");
+                    Timestamp dateOut = Timestamp.valueOf(request.getParameter("dateOut").trim()+":00.0");
                     int idUser = Integer.parseInt(request.getParameter("id_user"));
                     String name = request.getParameter("name");
 
@@ -71,12 +77,13 @@
                 </div>
             </div><%}
             } else if (accion != null && accion.equals("editar")) {
-                Timestamp dateIn = Timestamp.valueOf(request.getParameter("dateIn"));
-                Timestamp dateOut = Timestamp.valueOf(request.getParameter("dateOut"));
+                Timestamp dateIn = Timestamp.valueOf(request.getParameter("dateIn")+":00");
+                Timestamp dateOut = Timestamp.valueOf(request.getParameter("dateOut")+":00");
                 int idUser = Integer.parseInt(request.getParameter("id_user"));
+                int idBooking = Integer.parseInt(request.getParameter("id_booking"));
                 String name = request.getParameter("name");
 
-                Reservation reservation = new Reservation(dateIn, dateOut, name, idUser);
+                Reservation reservation = new Reservation(dateIn, dateOut, name, idUser, idBooking);
 
                 if (!gr.modifyReservation(reservation)) {%>
             <div class="row">
@@ -108,7 +115,7 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8">
-                    <table class="table table-striped">
+                    <table class="table">
                         <thead>
                         <th>ID reserva</th>
                         <th>ID Profesor</th>
@@ -127,9 +134,9 @@
                                 <td><%=cada.getId_User()%></td>
                                 <td><%=cada.getName()%></td>
                                 <% String fechaIn = ""+cada.getDateIn();
-                                   fechaIn = fechaIn.substring(0, fechaIn.length()-2);
+                                   fechaIn = fechaIn.substring(0, fechaIn.length()-5);
                                    String fechaOut = ""+cada.getDateOut();
-                                   fechaOut = fechaOut.substring(0, fechaOut.length()-2);
+                                   fechaOut = fechaOut.substring(0, fechaOut.length()-5);
                                 %><td><%=fechaIn%></td>
                                 <td><%=fechaOut%></td>
                                 <td>

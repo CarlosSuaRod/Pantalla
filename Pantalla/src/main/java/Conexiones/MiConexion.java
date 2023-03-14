@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class MiConexion {
 
     static Connection con = null;
-    static String URL = "jdbc:mysql://192.168.103.62:3306/Pantalla";
+    static String URL = "jdbc:mysql://192.168.103.55:3306/Pantalla";
     static String USER = "gestor";
     static String PASSWORD = "gestor";
 

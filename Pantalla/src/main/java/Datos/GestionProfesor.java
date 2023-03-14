@@ -69,7 +69,7 @@ public class GestionProfesor {
                 pstmt = this.con.prepareStatement("DELETE FROM Users where id_user=?");
                 pstmt.setInt(1, id);
 
-                pstmt.executeQuery();
+                pstmt.executeUpdate();
                 return true;
             }
         } catch (SQLException ex) {

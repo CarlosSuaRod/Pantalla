@@ -73,10 +73,11 @@ public class GestionReservas {
     public boolean modifyReservation(Reservation reservation) {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE Bookings SET dateIn=?, dateOut=? WHERE id_user=?");
+            ps = con.prepareStatement("UPDATE Bookings SET dateIn=?, dateOut=? WHERE id_booking=?");
             ps.setTimestamp(1, reservation.getDateIn());
             ps.setTimestamp(2, reservation.getDateOut());
-            ps.setInt(3, reservation.getId_User());
+            ps.setInt(3, reservation.getId_booking());
+            System.out.println(reservation.getId_booking());
 
             ps.executeUpdate();
             return true;
