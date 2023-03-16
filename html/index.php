@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="index.css" rel="stylesheet" type="text/css" />
+        <link href="./index.css" rel="stylesheet" type="text/css" />
         <link href="./css/global.min.css" rel="stylesheet">
         <!--<link href="./css/menu.min.css" rel="stylesheet">-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -89,7 +89,7 @@
                         <script>
                             let bookings = ["Reserva G101: "];
                         <?php
-                        $servername = "192.168.103.62";
+                        $servername = "192.168.103.55";
                         $username = "gestor";
                         $password = "gestor";
                         $dbname = "Pantalla";
